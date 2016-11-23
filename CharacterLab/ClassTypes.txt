@@ -1,0 +1,60 @@
+; 8 April 2000 Date of last revision to this file. Please change when editing.
+
+Type AIMainStatType = OneOf(Strength, HitPoints, Combat, Mysticism, Mana, Stealth) 
+
+Type AIType = OneOf(None, IdleAI, CombatAI)
+
+Type BlendType = OneOf(None, Translucent, Add, Subtract)
+
+Type Boolean = OneOf(True, False)
+
+Type CombatAIType = OneOf(None, BanditCombat, BasicFight, CommanderCombat, HumanoidArcherCombat, HumanoidCasterCombat, HumanoidHeroCombat, HumanoidHunterCombat, HumanoidMeleeCombat, UndeadArcherCombat, UndeadCasterCombat, UndeadComander, UndeadMeleeCombat, WolfCombat) 
+
+Type FacingType = OneOf(NW, NN, NE, EE, SE, SS, SW, WW)
+
+Type FlickerType = OneOf(None, Torch, Candle, Fluorescent)
+
+Type FluidType = OneOf(None, Clear, Murky)
+
+Type IdleAIDutyType = OneOf(Meander, Busy, Stand, Guard ) 
+
+Type IdleAIType = OneOf(None, FollowPath, HumanoidIdle, Meander, OrcIdle, ScoutIdle, UndeadIdle, WolfIdle) 
+
+Type ShadowType = OneOf(None, Simple, Complex)
+
+Type SoundSelfPlayType = OneOf(None, RndInterval, FixedInterval)
+
+Type SpellType = OneOf(Charge2, FireSpell, Heal, Push, ShockBlu, ShockGrn)
+
+Type UndeadAIType = OneOf(Skeleton, Ghost, Ghoul, Lich) 
+
+Type UseLightingType = OneOf(None, Vert, Horz)
+
+Type WolfAIType = OneOf(Dire, Rabid, Wolf, Starving)
+
+Type XRaySlopeType = OneOf(No, 0, 45, 90, 135)
+
+RecordType EquipmentList
+  leg1	             string
+  boot               string
+  leg2               string
+  chest1             string
+  chest2             string
+  arm                string
+  belt               string
+  chest3             string
+  gauntlet           string
+  outer              string
+  head               string
+  helmet             string
+  weapon             string
+  shield             string
+EndType
+
+RecordType ItemList
+  ListOfItems        string
+EndType
+
+RecordType ScriptString
+  ListOfScritps      string
+EndType

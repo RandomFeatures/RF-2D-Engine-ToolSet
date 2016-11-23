@@ -1,0 +1,200 @@
+; 8 April 2000 Date of last revision to this file. Please change WHEN editing.
+
+BaseClass GameObject
+  GUID                 string ; globally unique name
+  GroupName            string ; optional
+  EditFreeze           boolean default(False)
+  InScene              string
+EndClass
+
+BaseClass SpriteObject extends GameObject
+  Enabled              boolean default(True)
+  Facing               FacingType default(SS)
+  ini.Blend            BlendType default(None)
+  ini.BlendAmount      int range(0-255) default(0)
+  ini.FrameMultiplier  int default(2)
+  ini.MovementPerFrame float default(5)
+  ini.Shadow           ShadowType default(Simple)
+  ini.ShadowColor      Color default(0)
+  ini.UseLighting      UseLightingType default(None)
+  OnActivate(Events)   ScriptString
+EndClass
+
+BaseClass StaticObject Locked
+  Collidable           boolean default(True)
+  EditFreeze           boolean default(False)
+  FilterID             int
+  ini.XRayable         XRaySlopeType default(No)
+  InScene              string
+  XRayID               int
+  Zone                 int default(0)
+EndClass
+
+BaseClass GridSpace Locked
+  Depth                int
+  Fluid                FluidType default(None)
+  FilterID             int
+  Friction             int default(0)
+  GameInvisible        boolean default(True) ; tell Siege not to look for this GIF file
+  ListOfTiles          string
+  Reserved             int
+  StartGIF       
+    Editor\GridSpace.GIF
+  EndGIF
+EndClass
+
+BaseClass Trigger extends GameObject
+  Enabled              boolean default(True)
+  GameInvisible        boolean default(True) ; tell Siege not to look for this GIF file
+  OnceOnly             boolean default(False)
+  OnTrigger(Events)    ScriptString
+  Radius               int default(16)
+  ReTriggerable        boolean default(True)
+   ReTriggerDelay      int default(0) WHEN(OnceOnly=False)
+  TriggerCount         int default(1)
+  TriggerDelay         int default(0)
+  TriggerSound(Sounds) string ; filename
+  StartGIF
+    Editor\Trigger.GIF
+  EndGIF
+EndClass
+
+BaseClass Item extends SpriteObject
+  ItemName             string
+  OnDrop(Events)       ScriptString
+  OnPickUp(Events)     ScriptString
+EndClass
+
+BaseClass Light extends GameObject
+  Color                Color
+  Flicker              FlickerType default(None)
+  GameInvisible        boolean default(True) ; tell Siege not to look for this GIF file
+  Intensity            int Range(0-255) default(128)
+  On                   boolean default(True)
+  OnTurnOff(Events)    ScriptString
+  OnTurnOn(Events)     ScriptString
+  Radius               int default(256)
+  StartGIF      
+    Editor\Bulb.GIF
+  EndGIF
+EndClass
+
+BaseClass SoundPlayer extends GameObject
+  AudioFile            string
+  CollisionRadius      int default(64)
+  GameInvisible        boolean default(True) ; tell Siege not to look for this GIF file
+  IntervalPeriod       int default(0)
+  On                   boolean default(True)
+  OnTurnOff(Events)    ScriptString
+  OnTurnOn(Events)     ScriptString
+  SelfPlay             SoundSelfPlayType default(RndInterval)
+  UseAsAmbientFill     boolean default(True)
+  Volume               int Range(0-255) default(128)
+  StartGIF       
+    Editor\Speaker.GIF
+  EndGIF
+EndClass
+
+BaseClass Character extends SpriteObject
+  CharacterName         string
+  AIMode(AI)            AIType default(IdleAI)
+  Alliance(AI)          string
+  CombatAI(AI)          CombatAIType default(BasicFight)
+  IdleAI(AI)            IdleAIType default(Meander)
+  MyFriends(AI)         string ; list of names
+  MyEnemies(AI)         string ; list of names
+   AllowTalk(AI)        boolean default(True) WHEN(IdleAI IN HumanoidIdle, OrcIdle)
+   BaseCourage(AI)      int default(5)
+   Combative(AI)        boolean default(False) WHEN(IdleAI IN HumanoidIdle, OrcIdle)
+   Distance(AI)         int default(175) WHEN(CombatAI IN HumanoidCasterCombat, HumanoidArcherCombat, UndeadCasterCombat, HumanoidArcherCombat)
+   HealFirst(AI)        boolean default(True) WHEN(CombatAI IN HumanoidCasterCombat, UndeadCasterCombat)
+   IdleDuty(AI)         IdleAIDutyType default(Menader) WHEN(IdleAI IN HumanoidIdle, OrcIdle)
+   LeashLength(AI)      int default(50) WHEN(IdleAI=Meander)
+   MainStat(AI)         AIMainStatType default(Strength) WHEN(CombatAI IN HumanoidHeroCombat, HumanoidHunterCombat, CommanderCombat)
+   Moveable(AI)         boolean default(True) WHEN(CombatAI IN HumanoidCasterCombat, HumanoidArcherCombat, UndeadCasterCombat, UndeadArcherCombat)
+   TakeOrders(AI)       boolean default(True) ; --- Only Humanoid and Undead Combat AIs    
+   TimeToRun(AI)        int default(75)  ; --- not used in the undead AI if that will help    
+   UndeadType(AI)       UndeadAIType default(Skeleton) WHEN(IdleAI IN UndeadIdle, UndeadMeleeCombat)
+   WolfType(AI)         WolfAIType default(Wolf) WHEN(IdleAI IN WolfIdle, WolfCombat)
+  Charm(Stats)          int range(1-100) default(10)
+  Combat(Stats)         int range(1-100) default(5)
+  Constitution(Stats)   int range(1-100) default(7)
+  Coordination(Stats)   int range(1-100) default(7)
+  HealingRate(Stats)    int range(1-100) default(10)
+  Hearing(Stats)        int default(40)
+  HitPoints(Stats)      int range(1-1000) default(10)
+  Mana(Stats)           int range(1-1000) default(10)
+  Movement(Stats)       int range(1-50) default(10)
+  Mysticism(Stats)      int range(1-100) default(5)
+  Perception(Stats)     int range(1-100) default(10)
+  Smell(Stats)          int default(20)
+  Stealth(Stats)        int range(1-100) default(5)
+  Strength(Stats)       int range(1-100) default(7)
+  Recovery(Stats)       int range(1-100) default(10)
+  RechargeRate(Stats)   int range(1-100) default(10)
+  Restriction(Stats)    int range(1-200) default(0)
+  Vision(Stats)         int default(400)
+  Equipment             EquipmentList
+  Inventory             ItemList
+  OnDie(Events)         ScriptString
+  AttackSounds(Sounds)  string
+  DeathSounds(Sounds)   string    ; filename, comma separated list
+  PainSounds(Sounds)    string
+  BuyingDiscount(Xact)  float default(0.75)
+  IsMerchant(Xact)      boolean default(False)
+  MoneyAmount(Xact)     int default(0)
+  SellingMarkup(Xact)   float default(1.25)
+EndClass
+
+BaseClass Container extends SpriteObject
+  Name                  string ; should be generic descriptive name
+  Closed                boolean default(True)
+  CloseSound(Sounds)    string ; filename
+  GridHeight            int
+  GridWidth             int
+  Inventory             ItemList
+  OnClose(Events)       ScriptString
+  OnOpen(Events)        ScriptString
+  OnOpenAttempt(Events) ScriptString
+  OpenSound(Sounds)     string ; filename
+  Requires              string
+EndClass
+
+BaseClass Door extends SpriteObject
+  Closed                boolean default(True)
+  CloseSound(Sounds)    string ; filename
+  OnClose(Events)       ScriptString
+  OnOpen(Events)        ScriptString
+  OnOpenAttempt(Events) ScriptString
+  OpenSound(Sounds)     string ; filename
+  Requires              string
+EndClass
+
+BaseClass Quiver extends Item
+  FletchingColor       Color default(128)
+  TrackingDegree       int range(0-180)
+EndClass
+
+BaseClass Weapon extends Item
+  Range                int
+  Recovery             int
+  TwoHanded            boolean default(False)
+EndClass
+
+BaseClass CastingDevice extends Item
+  Spell                SpellType
+EndClass
+
+BaseClass Bow extends Item
+EndClass
+
+BaseClass PathCorner extends GameObject
+  Delay                int default(0) ; time in seconds to wait before going to next path point?
+  GameInvisible        boolean default(True) ; tell Siege not to look for this GIF file
+  NextDestination      string ; Can point to GroupName or GUID
+  StartGIF
+    Editor\PathCorner.GIF
+  EndGIF
+EndClass
+
+EndClass

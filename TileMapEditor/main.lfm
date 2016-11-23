@@ -1,0 +1,636 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 6
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Tile Map Editor v1.0'
+  ClientHeight = 689
+  ClientWidth = 1014
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Menu = MainMenu1
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 129
+    Top = 25
+    Width = 8
+    Height = 645
+    Cursor = crHSplit
+    Beveled = True
+    ResizeStyle = rsLine
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 25
+    Width = 129
+    Height = 645
+    Align = alLeft
+    BevelOuter = bvLowered
+    TabOrder = 0
+    object Splitter2: TSplitter
+      Left = 1
+      Top = 427
+      Width = 127
+      Height = 8
+      Cursor = crVSplit
+      Align = alBottom
+      Beveled = True
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 435
+      Width = 127
+      Height = 209
+      Align = alBottom
+      BevelOuter = bvLowered
+      TabOrder = 0
+      object imgPreview: TImage
+        Left = 1
+        Top = 1
+        Width = 125
+        Height = 207
+        Align = alClient
+        Center = True
+        Transparent = True
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 1
+      Width = 127
+      Height = 124
+      Align = alTop
+      BevelOuter = bvLowered
+      TabOrder = 1
+      object cbBase: TCheckBox
+        Left = 8
+        Top = 8
+        Width = 97
+        Height = 17
+        Caption = 'Base Layer'
+        Checked = True
+        State = cbChecked
+        TabOrder = 0
+        OnClick = cbBaseClick
+      end
+      object cbDiamond: TCheckBox
+        Left = 8
+        Top = 24
+        Width = 97
+        Height = 17
+        Caption = 'Diamond Layer'
+        TabOrder = 1
+        OnClick = cbBaseClick
+      end
+      object cbCollision: TCheckBox
+        Left = 8
+        Top = 40
+        Width = 97
+        Height = 17
+        Caption = 'Collision'
+        TabOrder = 2
+        OnClick = cbBaseClick
+      end
+      object cbStatic: TCheckBox
+        Left = 8
+        Top = 72
+        Width = 97
+        Height = 17
+        Caption = 'Statics'
+        TabOrder = 3
+        OnClick = cbBaseClick
+      end
+      object cbSprite: TCheckBox
+        Left = 8
+        Top = 88
+        Width = 97
+        Height = 17
+        Caption = 'Sprites'
+        TabOrder = 4
+        OnClick = cbBaseClick
+      end
+      object cbLight: TCheckBox
+        Left = 8
+        Top = 104
+        Width = 97
+        Height = 17
+        Caption = 'Lights'
+        TabOrder = 5
+        OnClick = cbBaseClick
+      end
+      object cbStart: TCheckBox
+        Left = 8
+        Top = 56
+        Width = 97
+        Height = 17
+        Caption = 'Start Tiles'
+        TabOrder = 6
+        OnClick = cbBaseClick
+      end
+    end
+    object PageControl1: TPageControl
+      Left = 1
+      Top = 125
+      Width = 127
+      Height = 302
+      ActivePage = tsStatics
+      Align = alClient
+      MultiLine = True
+      TabOrder = 2
+      TabPosition = tpBottom
+      OnChange = PageControl1Change
+      object tsTiles: TTabSheet
+        Caption = 'Tiles'
+        object tvTileList: TTreeNT
+          Left = 0
+          Top = 0
+          Width = 119
+          Height = 256
+          Align = alClient
+          Indent = 19
+          InsertMarkColor = -16777216
+          ItemHeight = 16
+          Options = [toAutoExpand, toAutoScroll, toEvenHeight, toHideSelection, toReadOnly, toRightClickSelect, toShowButtons, toShowLines, toShowRoot]
+          ParentColor = False
+          ScrollTime = 0
+          TabOrder = 0
+          OnClick = tvTileListClick
+        end
+      end
+      object tsStatics: TTabSheet
+        Caption = 'Static'
+        ImageIndex = 1
+        object tvStaticList: TTreeNT
+          Left = 0
+          Top = 0
+          Width = 119
+          Height = 256
+          Align = alClient
+          Indent = 19
+          InsertMarkColor = -16777216
+          ItemHeight = 16
+          Options = [toAutoExpand, toAutoScroll, toEvenHeight, toHideSelection, toReadOnly, toRightClickSelect, toShowButtons, toShowLines, toShowRoot]
+          ParentColor = False
+          ScrollTime = 0
+          TabOrder = 0
+          OnClick = tvStaticListClick
+        end
+      end
+      object tsSprites: TTabSheet
+        Caption = 'Sprite'
+        ImageIndex = 2
+        object tvSpriteList: TTreeNT
+          Left = 0
+          Top = 0
+          Width = 119
+          Height = 256
+          Align = alClient
+          Indent = 19
+          InsertMarkColor = -16777216
+          ItemHeight = 16
+          Options = [toAutoExpand, toAutoScroll, toEvenHeight, toHideSelection, toReadOnly, toRightClickSelect, toShowButtons, toShowLines, toShowRoot]
+          ParentColor = False
+          ScrollTime = 0
+          TabOrder = 0
+          OnClick = tvSpriteListClick
+        end
+      end
+    end
+  end
+  object mStatusBar: TStatusBar
+    Left = 0
+    Top = 670
+    Width = 1014
+    Height = 19
+    Panels = <    
+      item
+        Width = 125
+      end    
+      item
+        Width = 125
+      end    
+      item
+        Width = 125
+      end    
+      item
+        Width = 125
+      end    
+      item
+        Width = 125
+      end>
+    SimplePanel = False
+  end
+  object Panel3: TPanel
+    Left = 137
+    Top = 25
+    Width = 877
+    Height = 645
+    Align = alClient
+    BevelOuter = bvLowered
+    Color = clBlack
+    TabOrder = 2
+    object iMap: TImage
+      Left = 1
+      Top = 1
+      Width = 858
+      Height = 627
+      Align = alClient
+      DragCursor = crDefault
+      OnMouseDown = iMapMouseDown
+      OnMouseMove = iMapMouseMove
+      OnMouseUp = iMapMouseUp
+    end
+    object ScrollBarX: TScrollBar
+      Left = 1
+      Top = 628
+      Width = 875
+      Height = 16
+      Align = alBottom
+      LargeChange = 2
+      PageSize = 0
+      Position = 3
+      TabOrder = 0
+      OnScroll = ScrollBarXScroll
+    end
+    object ScrollBarY: TScrollBar
+      Left = 859
+      Top = 1
+      Width = 17
+      Height = 627
+      Align = alRight
+      Kind = sbVertical
+      LargeChange = 2
+      PageSize = 0
+      Position = 4
+      SmallChange = 2
+      TabOrder = 1
+      OnScroll = ScrollBarYScroll
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Top = 0
+    Width = 1014
+    Height = 25
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 3
+    object rgGrid: TRadioGroup
+      Left = 0
+      Top = -5
+      Width = 225
+      Height = 30
+      Columns = 3
+      ItemIndex = 0
+      Items.Strings = (
+        'Rectangle'
+        'Diamond'
+        'None'
+      )
+      TabOrder = 0
+      OnClick = rgGridClick
+    end
+    object rbStart: TRadioGroup
+      Left = 232
+      Top = -5
+      Width = 161
+      Height = 30
+      Columns = 2
+      ItemIndex = 0
+      Items.Strings = (
+        'Side One'
+        'Side Two'
+      )
+      TabOrder = 1
+      OnClick = rgGridClick
+    end
+  end
+  object ColorDialog: TColorDialog
+    Ctl3D = True
+    Left = 306
+    Top = 34
+  end
+  object SaveDialog: TSaveDialog
+    DefaultExt = 'mpd'
+    Filter = 'Map Data(*.map)|*.map'
+    Left = 315
+    Top = 170
+  end
+  object OpenDialog: TOpenDialog
+    DefaultExt = 'mpd'
+    Filter = 'Map Data(*.map)|*.map'
+    Left = 291
+    Top = 138
+  end
+  object OpenPictureDialog: TOpenPictureDialog
+    Filter = 'Bitmaps (*.bmp)|*.bmp'
+    Title = 'Open Backgound Image'
+    Left = 219
+    Top = 90
+  end
+  object MainMenu1: TMainMenu
+    Left = 360
+    Top = 24
+    object File1: TMenuItem
+      Caption = '&File'
+      object mnuNewMap: TMenuItem
+        Caption = '&New Map'
+        ShortCut = 113
+        OnClick = mnuNewMapClick
+      end
+      object mnuOpen: TMenuItem
+        Caption = '&Open Map'
+        OnClick = mnuOpenClick
+      end
+      object mnuSave: TMenuItem
+        Caption = '&Save Map'
+        ShortCut = 115
+        OnClick = mnuSaveClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Settings1: TMenuItem
+        Caption = 'S&ettings'
+        OnClick = Settings1Click
+      end
+      object mnuMapProp: TMenuItem
+        Caption = '&Map Properties'
+        OnClick = mnuMapPropClick
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object mnuExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = mnuExitClick
+      end
+    end
+    object Script1: TMenuItem
+      Caption = '&Script'
+      object EditScript1: TMenuItem
+        Caption = 'Edit Script'
+        OnClick = EditScript1Click
+      end
+      object Test1: TMenuItem
+        Caption = 'Test'
+        OnClick = Test1Click
+      end
+    end
+    object mnuTiles: TMenuItem
+      Caption = '&Tiles'
+      object mnuMergQuad: TMenuItem
+        Caption = 'Merge &Quad Tiles'
+        OnClick = mnuMergQuadClick
+      end
+      object FloodFill1: TMenuItem
+        Caption = 'Fl&ood Fill'
+        object mnuFillBase: TMenuItem
+          Caption = '&Base Tiles'
+          OnClick = mnuFillBaseClick
+        end
+        object mnuFillDiamond: TMenuItem
+          Caption = '&Diamond Tiles'
+          OnClick = mnuFillDiamondClick
+        end
+        object mnuFillCollision: TMenuItem
+          Caption = '&Collision'
+          OnClick = mnuFillCollisionClick
+        end
+      end
+      object Clear1: TMenuItem
+        Caption = 'Clear &Map'
+        object mnuClearBase: TMenuItem
+          Caption = '&Base Tiles'
+          OnClick = mnuClearBaseClick
+        end
+        object mnuClearDiamond: TMenuItem
+          Caption = '&Diamond Tiles'
+          OnClick = mnuClearDiamondClick
+        end
+        object mnuClearCollision: TMenuItem
+          Caption = '&Collision'
+          OnClick = mnuClearCollisionClick
+        end
+        object mnuClearAll: TMenuItem
+          Caption = 'Clear &All'
+          OnClick = mnuClearAllClick
+        end
+      end
+    end
+    object Color1: TMenuItem
+      Caption = '&Colors'
+      object mnuBackgroundColor: TMenuItem
+        Caption = '&Background'
+        OnClick = mnuBackgroundColorClick
+      end
+      object mnuGridColor: TMenuItem
+        Caption = '&Grid'
+        OnClick = mnuGridColorClick
+      end
+    end
+    object Popup1: TMenuItem
+      Caption = 'Popup'
+      Visible = False
+      object EditSprite1: TMenuItem
+        Caption = 'Edit Sprite'
+        ShortCut = 16453
+      end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object SelectGroup1: TMenuItem
+        Caption = 'Select Group'
+        ShortCut = 16455
+        OnClick = mnuSelectClick
+      end
+      object EditFacing1: TMenuItem
+        Caption = 'Edit Facing'
+        ShortCut = 16454
+        OnClick = EditFacing1Click
+      end
+      object ShowAll1: TMenuItem
+        Caption = 'Show All'
+        ShortCut = 16467
+        OnClick = mnuShowAllClick
+      end
+      object HideShow1: TMenuItem
+        Caption = 'Hide'
+        ShortCut = 16456
+        OnClick = mnuHideShowClick
+      end
+      object N6: TMenuItem
+        Caption = '-'
+      end
+      object DeleteSprite1: TMenuItem
+        Caption = 'Delete Sprite'
+        ShortCut = 16452
+        OnClick = mnuDeleteNPCClick
+      end
+      object LockAddMode1: TMenuItem
+        Caption = 'Lock Add Mode'
+        ShortCut = 16449
+        OnClick = LockAddMode1Click
+      end
+      object BeginGroup1: TMenuItem
+        Caption = 'Begin Group'
+        ShortCut = 16450
+        OnClick = BeginGroup1Click
+      end
+      object EndGroup1: TMenuItem
+        Caption = 'End Group'
+        Enabled = False
+        ShortCut = 16462
+        OnClick = EndGroup1Click
+      end
+    end
+  end
+  object popupMenu: TPopupMenu
+    AutoPopup = False
+    Left = 241
+    Top = 224
+    object mnuEditProperties: TMenuItem
+      Caption = 'Edit Properties'
+      ShortCut = 16453
+      OnClick = mnuEditPropertiesClick
+    end
+    object N4: TMenuItem
+      Caption = '-'
+    end
+    object SetLayer1: TMenuItem
+      Caption = 'Set Layer'
+      object Layer01: TMenuItem
+        Caption = 'Layer 0 (Below Ground)'
+        OnClick = Layer01Click
+      end
+      object Layer11: TMenuItem
+        Caption = 'Layer 1 (Ground)'
+        OnClick = Layer11Click
+      end
+      object Layer21: TMenuItem
+        Caption = 'Layer 2 (World)'
+        OnClick = Layer21Click
+      end
+      object Layer31: TMenuItem
+        Caption = 'Layer 3 (Roof)'
+        OnClick = Layer31Click
+      end
+    end
+    object SetSide1: TMenuItem
+      Caption = 'Set Side'
+      object Host1: TMenuItem
+        Caption = 'Host'
+        OnClick = Host1Click
+      end
+      object Challenger1: TMenuItem
+        Caption = 'Challenger'
+        OnClick = Challenger1Click
+      end
+    end
+    object Facing1: TMenuItem
+      Caption = 'Edit Facing'
+      ShortCut = 16454
+      object mnuNPCFaceNW: TMenuItem
+        Caption = 'NE'
+        OnClick = mnuNPCFaceNWClick
+      end
+      object mnuNPCFaceNE: TMenuItem
+        Caption = 'NW'
+        OnClick = mnuNPCFaceNEClick
+      end
+      object mnuNPCFaceSE: TMenuItem
+        Caption = 'SE'
+        OnClick = mnuNPCFaceSEClick
+      end
+      object mnuNPCFaceSW: TMenuItem
+        Caption = 'SW'
+        OnClick = mnuNPCFaceSWClick
+      end
+    end
+    object mnuShowAll: TMenuItem
+      Caption = 'Show All'
+      ShortCut = 16467
+      OnClick = mnuShowAllClick
+    end
+    object mnuHideShow: TMenuItem
+      Caption = 'Hide'
+      ShortCut = 16456
+      OnClick = mnuHideShowClick
+    end
+    object Select1: TMenuItem
+      Caption = 'Select'
+      object SelectAllHiddenObjects1: TMenuItem
+        Caption = 'Select All Hidden Objects'
+      end
+      object mnuSelect: TMenuItem
+        Caption = 'Select All in Group'
+        ShortCut = 16455
+        OnClick = mnuSelectClick
+      end
+      object DisableSelected1: TMenuItem
+        Caption = 'Disable Selected'
+      end
+      object DisableUnselected1: TMenuItem
+        Caption = 'Disable Unselected'
+      end
+      object EnableAll1: TMenuItem
+        Caption = 'Enable All'
+      end
+    end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object mnuDeleteNPC: TMenuItem
+      Caption = 'Delete Selected'
+      ShortCut = 16452
+      OnClick = mnuDeleteNPCClick
+    end
+    object N7: TMenuItem
+      Caption = '-'
+    end
+    object BeginGroup2: TMenuItem
+      Caption = 'Begin Group'
+      ShortCut = 16450
+      OnClick = BeginGroup1Click
+    end
+    object EndGroup2: TMenuItem
+      Caption = 'End Group'
+      Enabled = False
+      ShortCut = 16462
+      OnClick = EndGroup1Click
+    end
+  end
+  object popTile: TPopupMenu
+    Left = 497
+    Top = 201
+    object mnuNCorner: TMenuItem
+      Caption = 'Inner North Corner'
+      OnClick = mnuNCornerClick
+    end
+    object mnuECorner: TMenuItem
+      Caption = 'Inner East Corner'
+      OnClick = mnuECornerClick
+    end
+    object mnuSCorner: TMenuItem
+      Caption = 'Inner South Corner'
+      OnClick = mnuSCornerClick
+    end
+    object mnuWCorner: TMenuItem
+      Caption = 'Inner West Corner'
+      OnClick = mnuWCornerClick
+    end
+  end
+end
